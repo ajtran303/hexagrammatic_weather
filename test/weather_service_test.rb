@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative '../lib/weather_service'
 require 'minitest/autorun'
 require 'minitest/pride'
@@ -12,7 +10,7 @@ class WeatherServiceTest < MiniTest::Test
     weather_service = WeatherService.new('30315')
 
     assert_instance_of WeatherService, weather_service
-    assert_equal weather_service.location, '30315'
+    assert_equal '30315', weather_service.location
   end
 
   def test_it_gets_weather
@@ -25,8 +23,17 @@ class WeatherServiceTest < MiniTest::Test
     weather_service = WeatherService.new('Atlanta')
 
     weather_service.stub(:response, weather_data) do
+      assert_equal 'Clear, Clear Sky', weather_service.description
       assert_equal '28.8°F', weather_service.temperature
-      assert_equal 'Clear Clear Sky', weather_service.description
+    end
+  end
+
+  def test_it_handles_error
+    weather_service = WeatherService.new('Atlanta')
+
+    weather_service.stub(:response, nil) do
+      assert_equal 'Unclear Forecast', weather_service.description
+      assert_equal 'Try Again Later', weather_service.temperature
     end
   end
 end

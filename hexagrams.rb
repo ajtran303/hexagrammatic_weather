@@ -11,4 +11,4 @@ hexagram = Hexagram.new(JSON.parse(json).sample)
 weather = WeatherService.new('30315')
 
 puts "#{weather.description} #{weather.temperature}"
-puts [hexagram.name, hexagram.number, hexagram.unicode].join (' ')
+puts [hexagram.name, hexagram.number, hexagram.unicode].join(' ')
