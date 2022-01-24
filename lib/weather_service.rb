@@ -30,7 +30,6 @@ class WeatherService
     endpoint = 'data/2.5/weather'
     query_params = "?q=#{location}&units=imperial"
     # api_key = '&appid=YOUR_API_KEY'
-    api_key = '&appid=1d737a245df25d2e31d58974223582ed'
     url = base_uri + endpoint + query_params + api_key
     HTTParty.get(url)
   end
